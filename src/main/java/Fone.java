@@ -9,7 +9,7 @@ public class Fone {
     }
 
     public static boolean validarNumero(String numero){
-        String validos = "0123456789()-.";
+        String validos = "0123456789()-";
         for(int i=0;i<numero.length();i++){
             if(validos.indexOf(numero.charAt(i)) == -1)
                 return false;
@@ -27,6 +27,6 @@ public class Fone {
 
     @Override
     public String toString() {
-        return "[" + identificador + ":" + numero + "]"; 
+        return identificador + ":" + numero; 
     }
 }

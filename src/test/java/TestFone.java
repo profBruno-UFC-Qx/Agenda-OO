@@ -31,14 +31,14 @@ public class TestFone {
 
     @Test
     public void testValidarFoneCorretamente3(){
-        Fone fone = new Fone("claro", "15642.(77)");
+        Fone fone = new Fone("claro", "15642-15(77)");
         assertTrue(Fone.validarNumero(fone.getNumero()), 
             "Deve ser possível um numero de telefone que contenha apenas os caracteres - , () , . e digitos de 0-9.");
     }
 
     @Test
     public void testInvalidarFoneIncorreto1(){
-        Fone fone = new Fone("claro", "(99)1564.124a");
+        Fone fone = new Fone("claro", "(99)1564-124a");
         assertFalse(Fone.validarNumero(fone.getNumero()), 
             "Não deve ser possível um numero de telefone que não contenha apenas os caracteres de - , () , . e digitos de 0-9.");
         

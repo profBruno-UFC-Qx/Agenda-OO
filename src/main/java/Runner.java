@@ -2,7 +2,10 @@ public class Runner {
 
     public static void main(final String[] args) {
         
-        System.out.println(Fone.validarNumero("(88)22161-530.0"));
+        Contato contato = new Contato("Vitor");
+        contato.adicionarFone(new Fone("oi", "(62)43691-2182"));
+        System.out.println(contato);
+        
         
     }
 }
