@@ -8,10 +8,10 @@ public class Fone {
         this.numero = numero;
     }
 
-    public boolean validarNumero(String numero){
+    public static boolean validarNumero(String numero){
         String validos = "0123456789()-.";
         for(int i=0;i<numero.length();i++){
-            if(validos.charAt(numero.charAt(i)) == -1)
+            if(validos.indexOf(numero.charAt(i)) == -1)
                 return false;
         }
         return true;
