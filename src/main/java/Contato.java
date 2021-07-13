@@ -28,7 +28,7 @@ public class Contato {
     }
 
     public boolean removerFone(int index){
-        if(index < 0 || index > fones.size())
+        if(index < 0 || index >=  fones.size())
             return false;
         fones.remove(index);
         return true;
