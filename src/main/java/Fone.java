@@ -10,7 +10,9 @@ public class Fone {
 
     public static boolean validarNumero(String numero){
         String validos = "0123456789()-";
+        //pecorre a string do numero
         for(int i=0;i<numero.length();i++){
+            //verifica se existe algum caractere na string de numero que nao ocorre na string de validos
             if(validos.indexOf(numero.charAt(i)) == -1)
                 return false;
         }

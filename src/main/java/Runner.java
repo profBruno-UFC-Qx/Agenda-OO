@@ -20,9 +20,9 @@ public class Runner {
             System.out.println("fail: numero infomador é inválido");
         }// fail: numero infomador é inválido
 
-        contato.adicionarFone(new Fone("Tim", "(39)11322-7246"));
+        contato.adicionarFone(new Fone("Casa", "(39)11322-7246"));
         System.out.println(contato);
-        //  - Alex [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301] [2:Vivo:(83)13265-4910] [3:Tim:(39)11322-7246]
+        //  - Alex [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301] [2:Vivo:(83)13265-4910] [3:Casa:(39)11322-7246]
 
         contato.removerFone(1);
         contato.removerFone(2);
@@ -38,7 +38,5 @@ public class Runner {
         }// fail: index infomado não não existe.
         System.out.println(contato);
         // - Alex [0:Claro:(77)89085-9077] [1:Vivo:(83)13265-4910]
-
-
     }
 }

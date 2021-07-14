@@ -1,24 +1,8 @@
-# Instruções
+# Contato - Agenda 1
+![contato](assets/figura.png)
 
-Após clonar o projeto siga os seguintes passos:
-
-  1. Altere o **rootProject.name** no arquivo **setting.gradle**.
-  2. Atualize o README com o conteúdo próprio da atividade.
-  3. **Não esqueça de atualizar o link do relatório de entrega** e de remover essa seção *Instruções*.
-  4. Crie as classes esqueleto no branch principal (mair/master), commit e faça o push.
-  5. Crie um branch local para implementar a solução e os testes.
-     - `git checkout -b nome_do_branch`
-  6. Ao terminar, faça um push para um novo branch remoto.
-     - `git push origin nome_do_branch`
-  7. Na interface do GitHub abra um **Pull Request**.
-
-----
-
-# Título do trabalho
-Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. 
-Si num tem leite então bota uma pinga aí cumpadi! Vehicula non. Ut sed ex eros. 
-Vivamus sit amet nibh non tellus tristique interdum. 
-Mé faiz elementum girarzis, nisi eros vermeio.
+O objetivo dessa atividade é implementar uma classe responsável por guardar um único contato da agenda telefônica do seu celular.
+Cada contato pode ter vários telefones.
 
 
 - [Requisitos](#requisitos)
@@ -29,16 +13,65 @@ Mé faiz elementum girarzis, nisi eros vermeio.
 
 ## Requisitos
 
-- Requisito 1
-  - Descrição 1
-  - Descrição 2
-- Requisito 2
-  - Descrição 1
-  - Descrição 2
+- Inicializar
+  - Para inicializar um contato você precisar informar o nome do contato.
+- Inserir fones no contato
+  - Um fone tem um indentificador e um número
+  - Identificadores são nomes como: casa, fixo, oi, claro.
+- Remover fones do contato
+  - Remover os fones pelo indíce.
+  - Se o indíce informado não for válido, não vai ser possíve remover.
+- Validar números de telefone
+  - Processe os números de telefone para que sejem aceitos somente aqueles que tem os seguintes caracteres: ```0123456789()-```.
+  - Se o usuário tentar inserir um número de telefone inválido não adcione o fone no contato.
 
 ## Diagrama
 
 ## Exemplo de execução 
+```java
+public class Runner {
+
+    public static void main(final String[] args) {
+        
+        Contato contato = new Contato("Alex");
+        System.out.println(contato);
+        //  - Alex
+
+        contato.adicionarFone(new Fone("Claro", "(77)89085-9077"));
+        contato.adicionarFone(new Fone("Tim", "(63)61730-9301"));
+        contato.adicionarFone(new Fone("Vivo", "(83)13265-4910"));
+        System.out.println(contato);
+        //  - Alex [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301] [2:Vivo:(83)13265-4910]
+
+        if(!contato.adicionarFone(new Fone("Oi", "(44)40674-308[4]"))){
+            System.out.println("fail: numero infomador é inválido");
+        }// fail: numero infomador é inválido
+
+        if(!contato.adicionarFone(new Fone("Claro", "(33)40674-num"))){
+            System.out.println("fail: numero infomador é inválido");
+        }// fail: numero infomador é inválido
+
+        contato.adicionarFone(new Fone("Casa", "(39)11322-7246"));
+        System.out.println(contato);
+        //  - Alex [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301] [2:Vivo:(83)13265-4910] [3:Casa:(39)11322-7246]
+
+        contato.removerFone(1);
+        contato.removerFone(2);
+        System.out.println(contato);
+        // - Alex [0:Claro:(77)89085-9077] [1:Vivo:(83)13265-4910]
+
+        if(!contato.removerFone(3)){
+            System.out.println("fail: index infomado não não existe.");
+        }// fail: index infomado não não existe.
+
+        if(contato.removerFone(-2)){
+            System.out.println("fail: index infomado não não existe.");
+        }// fail: index infomado não não existe.
+        System.out.println(contato);
+        // - Alex [0:Claro:(77)89085-9077] [1:Vivo:(83)13265-4910]
+    }
+}
+```
 
 ## Relatório de Entrega
 
