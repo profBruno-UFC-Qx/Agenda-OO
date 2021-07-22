@@ -1,5 +1,9 @@
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Agenda {
     
@@ -9,8 +13,8 @@ public class Agenda {
         this.contatos = new TreeMap<>();
     }
 
-    public Map<String, Contato> getContatos() {
-        return contatos;
+    public Collection<Contato> getContatos() {
+        return contatos.values();
     }
 
     public Contato getContato(String name){
@@ -19,8 +23,9 @@ public class Agenda {
 
     public boolean adicionarContato(Contato contato){
         if(contatos.containsKey(contato.getName())){
+            Contato contatoAtual = contatos.get(contato.getName());
             for(Fone fone : contato.getFones())
-                contatos.get(contato.getName()).adicionarFone(fone);
+                contatoAtual.adicionarFone(fone);
             return false;
         }
         contatos.put(contato.getName(), contato);
@@ -33,5 +38,29 @@ public class Agenda {
             return true;
         }
         return false;
+    }
+
+    public ArrayList<Contato> pesquisar(String expressao){
+        ArrayList<Contato> resultados = new ArrayList<>();
+        
+        Pattern pattern = Pattern.compile(expressao);
+        Matcher matcher;
+        for(Contato contato : contatos.values()){
+            matcher = pattern.matcher(contato.toString());
+            if(matcher.find()){
+                resultados.add(contato);
+            }
+        }
+
+        return resultados;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder saida = new StringBuilder();
+        for(Contato contato : contatos.values()){
+            saida.append(contato.toString() + "\n");
+        }
+        return saida.toString();
     }
 }
