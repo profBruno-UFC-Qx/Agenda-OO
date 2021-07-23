@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 public class TestAgenda {
@@ -64,5 +66,29 @@ public class TestAgenda {
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
         assertFalse(agenda.removerContato("Ana"),
             "Não deve ser possível remover um contato se o nome do contato não estiver cadastrado na lista de contatos da agenda.");
+    }
+
+    @Test
+    public void testPesquisandoContatosPorNomes(){
+        Agenda agenda = new Agenda();
+        Contato contato = new Contato("Ana");
+        Contato contato1 = new Contato("Adriele");
+        Contato contato2 = new Contato("Ariele");
+        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato1.adicionarFone(new Fone("tim", "(46)40354-9846")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato2.adicionarFone(new Fone("oi", "(37)44338-4811")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(agenda.adicionarContato(contato),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        agenda.adicionarContato(contato1);
+        agenda.adicionarContato(contato2);
+        ArrayList<Contato> resultadoExato = new ArrayList<>();
+        ArrayList<Contato> resultado = agenda.pesquisar("ri");
+        resultadoExato.add(contato1);
+        resultadoExato.add(contato2);
+        assertEquals(resultadoExato, resultado,
+            "Deve ser possível encontrar contatos na lista de contatos se o padrão conrresponder a qualquer nome, identificado ou telefones");
     }
 }

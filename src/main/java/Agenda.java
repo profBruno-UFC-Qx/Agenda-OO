@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -13,8 +12,9 @@ public class Agenda {
         this.contatos = new TreeMap<>();
     }
 
-    public Collection<Contato> getContatos() {
-        return contatos.values();
+    public List<Contato> getContatos() {
+        ArrayList<Contato> contatosLista = new ArrayList<>(contatos.values());
+        return contatosLista;
     }
 
     public Contato getContato(String name){
