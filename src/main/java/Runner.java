@@ -1,42 +1,66 @@
+import java.util.ArrayList;
+
 public class Runner {
 
     public static void main(final String[] args) {
         
-        Contato contato = new Contato("Alex");
-        System.out.println(contato);
-        //  - Alex
-
+        Agenda agenda = new Agenda();
+        
+        Contato contato = new Contato("Adriele");
         contato.adicionarFone(new Fone("Claro", "(77)89085-9077"));
         contato.adicionarFone(new Fone("Tim", "(63)61730-9301"));
-        contato.adicionarFone(new Fone("Vivo", "(83)13265-4910"));
-        System.out.println(contato);
-        //  - Alex [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301] [2:Vivo:(83)13265-4910]
+        System.out.println(contato); // - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
+        
+        Contato contato1 = new Contato("Biatriz");
+        contato1.adicionarFone(new Fone("Vivo", "(80)63810-9092"));
+        System.out.println(contato1); // - Biatriz [0:Vivo:(80)63810-9092]
+        
+        Contato contato2 = new Contato("Ariele");
+        contato2.adicionarFone(new Fone("Trabalho", "(24)62362-1925"));
+        if(!contato2.adicionarFone(new Fone("Trabalho", "(24)62362-abc"))){
+            System.out.println("fail: numero de telefone invalido"); //fail: numero de telefone invalido
+        }
+        System.out.println(contato2); // - Ariele [0:Trabalho:(24)62362-1925]
+        
+        agenda.adicionarContato(contato);
+        agenda.adicionarContato(contato1);
+        agenda.adicionarContato(contato2);
+        System.out.println(agenda);
+        /*
+            - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
+            - Ariele [0:Trabalho:(24)62362-1925]
+            - Biatriz [0:Vivo:(80)63810-9092]
+        */
 
-        if(!contato.adicionarFone(new Fone("Oi", "(44)40674-308[4]"))){
-            System.out.println("fail: numero infomador é inválido");
-        }// fail: numero infomador é inválido
+        Contato contato3 = new Contato("Biatriz");
+        contato3.adicionarFone(new Fone("OI", "(59)67638-0967"));
+        contato3.adicionarFone(new Fone("Casa", "(59)67638-0967"));
+        agenda.adicionarContato(contato3);
+        System.out.println(agenda);
+        /*
+            - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
+            - Ariele [0:Trabalho:(24)62362-1925]
+            - Biatriz [0:Vivo:(80)63810-9092] [1:OI:(59)67638-0967] [2:Casa:(59)67638-0967]
+        */
 
-        if(!contato.adicionarFone(new Fone("Claro", "(33)40674-num"))){
-            System.out.println("fail: numero infomador é inválido");
-        }// fail: numero infomador é inválido
+        agenda.removerFone("Adriele", 1);
+        System.out.println(agenda);
+        /*
+            - Adriele [0:Claro:(77)89085-9077]
+            - Ariele [0:Trabalho:(24)62362-1925]
+            - Biatriz [0:Vivo:(80)63810-9092] [1:OI:(59)67638-0967] [2:Casa:(59)67638-0967]
+        */
 
-        contato.adicionarFone(new Fone("Casa", "(39)11322-7246"));
-        System.out.println(contato);
-        //  - Alex [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301] [2:Vivo:(83)13265-4910] [3:Casa:(39)11322-7246]
-
-        contato.removerFone(1);
-        contato.removerFone(2);
-        System.out.println(contato);
-        // - Alex [0:Claro:(77)89085-9077] [1:Vivo:(83)13265-4910]
-
-        if(!contato.removerFone(3)){
-            System.out.println("fail: index infomado não não existe.");
-        }// fail: index infomado não não existe.
-
-        if(contato.removerFone(-2)){
-            System.out.println("fail: index infomado não não existe.");
-        }// fail: index infomado não não existe.
-        System.out.println(contato);
-        // - Alex [0:Claro:(77)89085-9077] [1:Vivo:(83)13265-4910]
+        if(!agenda.removerContato("Alex")){
+            System.out.println("fail: nome do contato não esta cadastrado na ageda"); 
+            // fail: nome do contato não esta cadastrado na agenda
+        }
+        ArrayList<Contato> resultados = agenda.pesquisar("le");
+        for(Contato resultado : resultados)
+            System.out.println(resultado.toString());
+        /*
+            - Adriele [0:Claro:(77)89085-9077]
+            - Ariele [0:Trabalho:(24)62362-1925]
+        */
     }
 }

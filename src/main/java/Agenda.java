@@ -40,6 +40,14 @@ public class Agenda {
         return false;
     }
 
+    public boolean removerFone(String name, int index){
+        if(contatos.containsKey(name)){
+            if(contatos.get(name).removerFone(index))
+                return true;
+        }
+        return false;
+    }
+
     public ArrayList<Contato> pesquisar(String expressao){
         ArrayList<Contato> resultados = new ArrayList<>();
         
