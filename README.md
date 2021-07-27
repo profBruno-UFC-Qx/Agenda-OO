@@ -1,7 +1,7 @@
-# Contato - Agenda 1
-![contato](assets/list-contacts.mp4)
+# Contato - Agenda 
+![contato](assets/figura.jpg)
 
-O objetivo dessa atividade é implementar uma uma agenda que possui vários contatos e cada contato possui vários telefones.
+O objetivo dessa atividade é implementar uma agenda que possui vários contatos e cada contato possui vários telefones.
 
 
 - [Requisitos](#requisitos)
@@ -23,7 +23,7 @@ O objetivo dessa atividade é implementar uma uma agenda que possui vários cont
 - Adicionar contato na ageda
   - O contato possui o nome como chave
   - Se tentar adicionar outro contato na agenda com o mesmo nome, adicione apenas os telefones no contato existente.
-- Mostrar na ageda
+- Mostrar na agenda
   - Exiba os contatos da agenda em ordem alfabética.
 - Remoção de contatos da agenda
   - Remover contato pela chave.
