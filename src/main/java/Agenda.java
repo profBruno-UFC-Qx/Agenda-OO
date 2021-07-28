@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -59,7 +60,7 @@ public class Agenda {
                 resultados.add(contato);
             }
         }
-
+        Collections.sort(resultados);
         return resultados;
     }
 
@@ -70,5 +71,12 @@ public class Agenda {
             saida.append(contato.toString() + "\n");
         }
         return saida.toString();
+    }
+}
+
+class teste{
+
+    public static void main(String[] args) {
+        
     }
 }

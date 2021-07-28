@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contato {
+public class Contato implements Comparable<Contato> {
     
     private String name;
     private ArrayList<Fone> fones;
@@ -17,6 +17,10 @@ public class Contato {
 
     public List<Fone> getFones() {
         return fones;
+    }
+
+    public int compareTo(Contato contato){
+        return this.name.compareTo(contato.getName());
     }
 
     public boolean adicionarFone(Fone fone){
