@@ -31,6 +31,7 @@ O objetivo dessa atividade é implementar uma agenda que possui vários contatos
 - Busca
   - Fazer uma busca por um padrão em todos os atributos do contato, seja por nome, identificado ou telefone.
   - Se o contato tiver qualquer campo que combine com a string pattern de busca, ele deve ser retornado. Se o pattern é maria, devem ser retornados os contatos como "maria julia", "mariana", "ana maria" etc. Também inclua na busca identificador do telefone e o número de telefone.
+  - Exiba os resultados também em ordem alfabética.
 
 
 ## Diagrama
