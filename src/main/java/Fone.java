@@ -1,9 +1,9 @@
 public class Fone {
     
-    private String identificador;
+    private Identificador identificador;
     private String numero;
 
-    public Fone(String identificador, String numero){
+    public Fone(Identificador identificador, String numero){
         this.identificador = identificador;
         this.numero = numero;
     }
@@ -19,7 +19,7 @@ public class Fone {
         return true;
     }
 
-    public String getIdentificador() {
+    public Identificador getIdentificador() {
         return identificador;
     }
 
@@ -29,6 +29,6 @@ public class Fone {
 
     @Override
     public String toString() {
-        return identificador + ":" + numero; 
+        return identificador.toString() + ":" + numero; 
     }
 }

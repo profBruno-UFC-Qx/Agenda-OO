@@ -20,9 +20,9 @@ public class TestAgenda {
     public void testAdicionarContatoComSucesso(){
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato.adicionarFone(new Fone("casa", "(63)54612-5374")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CASA, "(63)54612-5374")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertEquals(2, contato.getFones().size(),
             "Ao adicionar telefones válidos, eles serão salvos na lista de telefones do contato.");
@@ -37,11 +37,11 @@ public class TestAgenda {
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
         Contato contato1 = new Contato("Alex");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato1.adicionarFone(new Fone("tim", "(16)69902-3026")),
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.TIM, "(16)69902-3026")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato1.adicionarFone(new Fone("vivo", "(51)31658-4460")),
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.VIVO, "(51)31658-4460")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");    
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
@@ -57,9 +57,9 @@ public class TestAgenda {
     public void testRemoverContatoComSucesso(){
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        contato.adicionarFone(new Fone("tim", "(16)69902-3026"));
+        contato.adicionarFone(new Fone(Identificador.VIVO, "(16)69902-3026"));
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
         assertTrue(agenda.removerContato("Alex"),
@@ -72,10 +72,10 @@ public class TestAgenda {
     public void testRemoverFoneDoContatoDaAgenda(){
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
-        Fone fone = new Fone("claro", "(59)19536-2054");
+        Fone fone = new Fone(Identificador.CLARO, "(59)19536-2054");
         assertTrue(contato.adicionarFone(fone),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        contato.adicionarFone(new Fone("tim", "(16)69902-3026"));
+        contato.adicionarFone(new Fone(Identificador.TIM, "(16)69902-3026"));
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
         assertTrue(agenda.removerFone("Alex", 1),
@@ -94,7 +94,7 @@ public class TestAgenda {
     public void testRemoverFoneDoContatoDaAgendaComNomeNaoCadastrado(){
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
@@ -106,7 +106,7 @@ public class TestAgenda {
     public void testRemoverFoneDoContatoDaAgendaComIndiceIncorreto(){
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
@@ -120,9 +120,9 @@ public class TestAgenda {
     public void testRemoverContatoComNomeNaoCadastrado(){
         Agenda agenda = new Agenda();
         Contato contato = new Contato("Alex");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        contato.adicionarFone(new Fone("tim", "(16)69902-3026"));
+        contato.adicionarFone(new Fone(Identificador.TIM, "(16)69902-3026"));
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
         assertFalse(agenda.removerContato("Ana"),
@@ -135,11 +135,11 @@ public class TestAgenda {
         Contato contato = new Contato("Ana");
         Contato contato1 = new Contato("Adriele");
         Contato contato2 = new Contato("Ariele");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-2054")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-2054")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato1.adicionarFone(new Fone("tim", "(46)40354-9846")),
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.TIM, "(46)40354-9846")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato2.adicionarFone(new Fone("oi", "(37)44338-4811")),
+        assertTrue(contato2.adicionarFone(new Fone(Identificador.OI, "(37)44338-4811")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
@@ -159,11 +159,11 @@ public class TestAgenda {
         Contato contato = new Contato("Geoana");
         Contato contato1 = new Contato("Adriele");
         Contato contato2 = new Contato("Ana");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-9999")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-9999")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato1.adicionarFone(new Fone("tim", "(46)40354-8453")),
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.TIM, "(46)40354-8453")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato2.adicionarFone(new Fone("oi", "(37)44338-4999")),
+        assertTrue(contato2.adicionarFone(new Fone(Identificador.OI, "(37)44338-4999")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
@@ -183,11 +183,11 @@ public class TestAgenda {
         Contato contato = new Contato("Ana");
         Contato contato1 = new Contato("Adriele");
         Contato contato2 = new Contato("Ariele");
-        assertTrue(contato.adicionarFone(new Fone("claro", "(59)19536-9999")),
+        assertTrue(contato.adicionarFone(new Fone(Identificador.CLARO, "(59)19536-9999")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato1.adicionarFone(new Fone("tim", "(46)40354-9846")),
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.TIM, "(46)40354-9846")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
-        assertTrue(contato2.adicionarFone(new Fone("oi", "(37)44338-4811")),
+        assertTrue(contato2.adicionarFone(new Fone(Identificador.OI, "(37)44338-4811")),
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");

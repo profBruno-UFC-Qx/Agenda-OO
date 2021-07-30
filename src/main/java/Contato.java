@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Contato implements Comparable<Contato> {
     
@@ -15,7 +14,7 @@ public class Contato implements Comparable<Contato> {
         return name;
     }
 
-    public List<Fone> getFones() {
+    public ArrayList<Fone> getFones() {
         return fones;
     }
 

@@ -49,6 +49,19 @@ public class Agenda {
         return false;
     }
 
+    public int quantidadeDeFones(Identificador identificador){
+        int quantidade = 0;
+        for(Contato contato : contatos.values()){
+            ArrayList<Fone> fones = contato.getFones();
+            for(int i=0;i<fones.size();i++){
+                if(fones.get(i).getIdentificador() == identificador){ 
+                    quantidade++;
+                }
+            }
+        }
+        return quantidade;
+    }
+
     public ArrayList<Contato> pesquisar(String expressao){
         ArrayList<Contato> resultados = new ArrayList<>();
         
@@ -71,12 +84,5 @@ public class Agenda {
             saida.append(contato.toString() + "\n");
         }
         return saida.toString();
-    }
-}
-
-class teste{
-
-    public static void main(String[] args) {
-        
     }
 }
