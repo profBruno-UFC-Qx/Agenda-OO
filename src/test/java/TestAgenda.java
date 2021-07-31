@@ -92,8 +92,7 @@ public class TestAgenda {
             "Deve ser possível remover um contato se o nome do contato estiver cadastrado na agenda e se indice do fone corresponder a um fone.");
         assertEquals(1, contato.getQuantidadeFones(),
             "Ao remover um fone pelo indice o fone irá ser excluído permanentemente da lista de fones do contato.");
-        List<Fone> fones = new ArrayList<>();
-        fones.add(fone);
+        List<Fone> fones = Arrays.asList(fone);
         List<Fone> restantes = contato.getFones();
         assertEquals(fones, restantes,
             "Ao remover um fone pelo indice o fone que será excluído tem que corresponder exatamente ao indíce que foi informado.");

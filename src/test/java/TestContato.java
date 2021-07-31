@@ -11,7 +11,7 @@ public class TestContato {
         Contato contato = new Contato("Alex");
         assertEquals("Alex", contato.getName(),
             "Ao inicializar um contato, o seu nome deve ser igual ao informado no construtor.");
-        assertTrue(contato.getFones().isEmpty(),
+        assertEquals(0, contato.getQuantidadeFones(),
             "Ao inicializar um contato, não deve haver fones na lista de fones.");
     }
 
