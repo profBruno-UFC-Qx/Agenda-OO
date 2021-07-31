@@ -14,14 +14,20 @@ public class Agenda {
     }
 
     public List<Contato> getContatos() {
-        return new ArrayList<Contato>(contatos.values());
+        return new ArrayList<>(contatos.values());
     }
+
+    public int getQuantidadeDeContatos() { return contatos.size(); }
 
     public Contato getContato(String name){
         return contatos.get(name);
     }
 
     public boolean adicionarContato(Contato contato){
+        if (contato.getQuantidadeFones() == 0) {
+            return false;
+        }
+
         if(contatos.containsKey(contato.getName())){
             Contato contatoAtual = contatos.get(contato.getName());
             for(Fone fone : contato.getFones())
@@ -43,7 +49,7 @@ public class Agenda {
         return false;
     }
 
-    public int quantidadeDeFones(Identificador identificador){
+    public int getQuantidadeDeFones(Identificador identificador){
         int quantidade = 0;
         for(Contato contato : contatos.values()){
             ArrayList<Fone> fones = contato.getFones();
@@ -56,10 +62,10 @@ public class Agenda {
         return quantidade;
     }
 
-    public int quantidadeTotalDeFones(){
+    public int getQuantidadeDeFones(){
         int quantidadeTotal = 0;
         for(Contato contato : contatos.values()){
-            quantidadeTotal += contato.quantidadeFones();
+            quantidadeTotal += contato.getQuantidadeFones();
         }
         return quantidadeTotal;
     }

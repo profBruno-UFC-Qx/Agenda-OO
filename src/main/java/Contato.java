@@ -14,7 +14,7 @@ public class Contato implements Comparable<Contato> {
         return name;
     }
 
-    public int quantidadeFones(){
+    public int getQuantidadeFones(){
         return fones.size();
     }
 

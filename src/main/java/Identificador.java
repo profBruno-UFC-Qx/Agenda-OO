@@ -1,9 +1,6 @@
 public enum Identificador {
     
-    TIM("Tim"),
-    CLARO("Claro"),
-    VIVO("Vivo"),
-    OI("Oi"),
+    CELULAR("Celular"),
     CASA("Casa"),
     TRABALHO("Trabalho");
 

@@ -16,25 +16,28 @@ O objetivo dessa atividade é implementar uma agenda que possui vários contatos
   - Para inicializar um contato você precisar informar o nome do contato.
 - Inserir fones no contato
   - Um fone tem um indentificador e um número
-  - Identificadores são nomes como: casa, fixo, tim, claro.
+  - Identificadores são nomes como: casa, trabalho e celular.
 - Validar números de telefone
   - Processe os números de telefone para que sejem aceitos somente aqueles que tem os seguintes caracteres: ```0123456789()-```.
   - Se o usuário tentar inserir um número de telefone inválido não adcione o fone no contato.
 - Adicionar contato na ageda
-  - O contato possui o nome como chave
-  - Se tentar adicionar outro contato na agenda com o mesmo nome, adicione apenas os telefones no contato existente.
+  - O nome do contato é seu identificador único.
+  - Não deve ser possível adicionar um contato sem telefone.
+  - Ao tentar adicionar outro contato na agenda com o mesmo nome, apenas os telefones no novo contato devem ser adicionados ao contato existente.
 - Mostrar na agenda
-  - Exiba os contatos da agenda em ordem alfabética.
+  - Exibe os contatos da agenda em ordem alfabética.
 - Remoção de contatos da agenda
-  - Remover contato pela chave.
-  - Remover telefone do contato pela chave e por indíce do telefone.
+  - Deve ser possível remover o contato ao informar o identificador único do contato.
+  - Deve ser possível remover telefone do contato por meio de seu identificador único e pelo índice do telefone.
 - Busca
-  - Fazer uma busca por um padrão em todos os atributos do contato, seja por nome, identificado ou telefone.
-  - Se o contato tiver qualquer campo que combine com a string pattern de busca, ele deve ser retornado. Se o pattern é maria, devem ser retornados os contatos como "maria julia", "mariana", "ana maria" etc. Também inclua na busca identificador do telefone e o número de telefone.
-  - Exiba os resultados também em ordem alfabética.
-- Pesquisar quantidade de telefones
-  - Exiba a quantidade de telefones de cada identificador cadastrados na agenda.
-  - Exiba a quantidade total de telefones cadastrados na agenda.
+  - Deve ser possível realizar uma busca por um padrão em todos os atributos do contato, seja por nome, identificado ou telefone.
+    - Se qualquer campo do contato combinar com o padrão buscado, o contato deve ser retornado. 
+      Se o usuário busca por 'maria', devem ser retornados os contatos como "maria julia", "mariana", "ana maria" etc. 
+    - Também inclua na busca identificador do telefone e o número de telefone.
+    - Exiba os resultados também em ordem alfabética.
+- Resumo da agenda
+  - Deve ser possível verificar a quantidade de telefones na agenda de cada identificador.
+  - Deve ser possível verificar a quantidade de telefones a quantidade total de telefones cadastrados na agenda.
 
 
 ## Diagrama
@@ -121,4 +124,4 @@ public class Runner {
 
 ## Relatório de Entrega
 
-Não esqueça de preencher o seguinte formulário [Link para formulário](#form) ao completar a atividade.
+Não esqueça de preencher o seguinte formulário [Link para formulário](https://forms.gle/htZteRiwG86eA8Tf9) ao completar a atividade.
