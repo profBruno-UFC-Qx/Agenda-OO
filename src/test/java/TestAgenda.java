@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -115,7 +116,6 @@ public class TestAgenda {
     }
 
     
-
     @Test
     public void testRemoverContatoComNomeNaoCadastrado(){
         Agenda agenda = new Agenda();
@@ -143,12 +143,12 @@ public class TestAgenda {
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
-        agenda.adicionarContato(contato1);
-        agenda.adicionarContato(contato2);
-        List<Contato> resultadoExato = new ArrayList<>();
+        assertTrue(agenda.adicionarContato(contato1),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertTrue(agenda.adicionarContato(contato2),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        List<Contato> resultadoExato = Arrays.asList(contato1, contato2);
         List<Contato> resultado = agenda.pesquisar("ri");
-        resultadoExato.add(contato1);
-        resultadoExato.add(contato2);
         assertEquals(resultadoExato, resultado,
             "Deve ser possível encontrar contatos na lista de contatos se o padrão conrresponder a qualquer nome, identificado ou telefones");
     }
@@ -167,12 +167,12 @@ public class TestAgenda {
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
-        agenda.adicionarContato(contato1);
-        agenda.adicionarContato(contato2);
-        List<Contato> resultadoExato = new ArrayList<>();
+        assertTrue(agenda.adicionarContato(contato1),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertTrue(agenda.adicionarContato(contato2),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        List<Contato> resultadoExato = Arrays.asList(contato2, contato);
         List<Contato> resultado = agenda.pesquisar("999");
-        resultadoExato.add(contato2);
-        resultadoExato.add(contato);
         assertEquals(resultadoExato, resultado,
             "Deve ser possível encontrar contatos na lista de contatos se o padrão conrresponder a qualquer nome, identificado ou telefones");
     }
@@ -191,8 +191,10 @@ public class TestAgenda {
             "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
-        agenda.adicionarContato(contato1);
-        agenda.adicionarContato(contato2);
+        assertTrue(agenda.adicionarContato(contato1),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertTrue(agenda.adicionarContato(contato2),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
         List<Contato> resultadoExato = new ArrayList<>();
         List<Contato> resultado = agenda.pesquisar("xyz");
         assertEquals(resultadoExato, resultado,
@@ -207,13 +209,54 @@ public class TestAgenda {
         Contato contato2 = new Contato("Biatriz");
         assertTrue(agenda.adicionarContato(contato),
             "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
-        agenda.adicionarContato(contato1);
-        agenda.adicionarContato(contato2);
-        List<Contato> listaEsperada = new ArrayList<>();
-        listaEsperada.add(contato1);
-        listaEsperada.add(contato2);
-        listaEsperada.add(contato);
+        assertTrue(agenda.adicionarContato(contato1),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertTrue(agenda.adicionarContato(contato2),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        List<Contato> listaEsperada = Arrays.asList(contato1, contato2, contato);
         List<Contato> lista = agenda.getContatos();
         assertEquals(listaEsperada, lista);
+    }
+
+    @Test
+    public void testQuantidadeDeTelefones(){
+        Agenda agenda = new Agenda();
+        Contato contato = new Contato("Carlos");
+        Contato contato1 = new Contato("Adriele");
+        assertTrue(contato.adicionarFone(new Fone(Identificador.OI, "(18)12329-5538")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato.adicionarFone(new Fone(Identificador.TIM, "(70)33126-6144")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.OI, "(84)49197-8547")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(agenda.adicionarContato(contato),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertTrue(agenda.adicionarContato(contato1),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertEquals(2, agenda.quantidadeDeFones(Identificador.OI),
+            "Deve ser possível pesquisar pela quantidade de fones com base nos identificador pesquisado.");
+    }
+
+    @Test
+    public void testQuantidadeTotalDeTelefones(){
+        Agenda agenda = new Agenda();
+        Contato contato = new Contato("Alex");
+        Contato contato1 = new Contato("Adriele");
+        assertTrue(contato.adicionarFone(new Fone(Identificador.OI, "(18)12329-5538")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato.adicionarFone(new Fone(Identificador.TIM, "(70)33126-6144")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.OI, "(84)49197-8547")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertTrue(contato1.adicionarFone(new Fone(Identificador.CASA, "(33)14397-2247")),
+            "Deve ser possível adicionar um fone a um conato se o número estiver correto.");
+        assertFalse(contato.adicionarFone(new Fone(Identificador.VIVO, "(aa)1564-75863")), 
+            "Não deve ser possível um numero de telefone que não contenha apenas os caracteres de - , () , . e digitos de 0-9.");
+        assertTrue(agenda.adicionarContato(contato),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertTrue(agenda.adicionarContato(contato1),
+            "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.");
+        assertEquals(4, agenda.quantidadeTotalDeFones(),
+            "Deve ser possível pesquisar pela quantidade total de fones cadastrados na agenda.");
     }
 }

@@ -12,16 +12,16 @@ public class Runner {
         System.out.println(contato); // - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
         
         Contato contato1 = new Contato("Biatriz");
-        contato1.adicionarFone(new Fone(Identificador.VIVO, "(80)63810-9092"));
-        System.out.println(contato1); // - Biatriz [0:Vivo:(80)63810-9092]
+        contato1.adicionarFone(new Fone(Identificador.TRABALHO, "(80)63810-9092"));
+        System.out.println(contato1); // - Biatriz [0:Trabalho:(80)63810-9092]
         
         Contato contato2 = new Contato("Ariele");
         contato2.adicionarFone(new Fone(Identificador.TRABALHO, "(24)62362-1925"));
-        contato2.adicionarFone(new Fone(Identificador.TRABALHO, "(79)98614-1326"));
-        if(!contato2.adicionarFone(new Fone(Identificador.TRABALHO, "(24)62362-abc"))){
+        contato2.adicionarFone(new Fone(Identificador.OI, "(79)98614-1326"));
+        if(!contato2.adicionarFone(new Fone(Identificador.VIVO, "(24)62362-abc"))){
             System.out.println("fail: numero de telefone invalido"); //fail: numero de telefone invalido
         }
-        System.out.println(contato2); // - Ariele [0:Trabalho:(24)62362-1925] [1:Trabalho:(79)98614-1326]
+        System.out.println(contato2); // - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
         
         agenda.adicionarContato(contato);
         agenda.adicionarContato(contato1);
@@ -29,12 +29,12 @@ public class Runner {
         System.out.println(agenda);
         /*
             - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
-            - Ariele [0:Trabalho:(24)62362-1925]
-            - Biatriz [0:Vivo:(80)63810-9092]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092]
         */
 
         int quantidade = agenda.quantidadeDeFones(Identificador.TRABALHO);
-        System.out.println("Total de telefones com o identifcador (Trabalho) é igual a" +  quantidade);
+        System.out.println("Total de telefones com o identifcador (Trabalho) é igual a " +  quantidade);
         // Total de telefones com o identifcador (Trabalho) é igual a 2
 
         Contato contato3 = new Contato("Biatriz");
@@ -44,17 +44,21 @@ public class Runner {
         System.out.println(agenda);
         /*
             - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
-            - Ariele [0:Trabalho:(24)62362-1925]
-            - Biatriz [0:Vivo:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
         */
 
         agenda.removerFone("Adriele", 1);
         System.out.println(agenda);
         /*
             - Adriele [0:Claro:(77)89085-9077]
-            - Ariele [0:Trabalho:(24)62362-1925]
-            - Biatriz [0:Vivo:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
         */
+
+        int quantidadeTotal = agenda.quantidadeTotalDeFones();
+        System.out.println("Total de telefones cadastrados na agenda é igual a " + quantidadeTotal);
+        //"Total de telefones cadastrados na agenda é igual a 6
 
         if(!agenda.removerContato("Alex")){
             System.out.println("fail: nome do contato não esta cadastrado na agenda"); 
@@ -66,7 +70,7 @@ public class Runner {
             System.out.println(resultado.toString());
         /*
             - Adriele [0:Claro:(77)89085-9077]
-            - Ariele [0:Trabalho:(24)62362-1925]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
         */
     }
 }

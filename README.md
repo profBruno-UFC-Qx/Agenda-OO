@@ -32,6 +32,9 @@ O objetivo dessa atividade é implementar uma agenda que possui vários contatos
   - Fazer uma busca por um padrão em todos os atributos do contato, seja por nome, identificado ou telefone.
   - Se o contato tiver qualquer campo que combine com a string pattern de busca, ele deve ser retornado. Se o pattern é maria, devem ser retornados os contatos como "maria julia", "mariana", "ana maria" etc. Também inclua na busca identificador do telefone e o número de telefone.
   - Exiba os resultados também em ordem alfabética.
+- Pesquisar quantidade de telefones
+  - Exiba a quantidade de telefones de cada identificador cadastrados na agenda.
+  - Exiba a quantidade total de telefones cadastrados na agenda.
 
 
 ## Diagrama
@@ -47,20 +50,21 @@ public class Runner {
         Agenda agenda = new Agenda();
         
         Contato contato = new Contato("Adriele");
-        contato.adicionarFone(new Fone("Claro", "(77)89085-9077"));
-        contato.adicionarFone(new Fone("Tim", "(63)61730-9301"));
+        contato.adicionarFone(new Fone(Identificador.CLARO, "(77)89085-9077"));
+        contato.adicionarFone(new Fone(Identificador.TIM, "(63)61730-9301"));
         System.out.println(contato); // - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
         
         Contato contato1 = new Contato("Biatriz");
-        contato1.adicionarFone(new Fone("Vivo", "(80)63810-9092"));
-        System.out.println(contato1); // - Biatriz [0:Vivo:(80)63810-9092]
+        contato1.adicionarFone(new Fone(Identificador.TRABALHO, "(80)63810-9092"));
+        System.out.println(contato1); // - Biatriz [0:Trabalho:(80)63810-9092]
         
         Contato contato2 = new Contato("Ariele");
-        contato2.adicionarFone(new Fone("Trabalho", "(24)62362-1925"));
-        if(!contato2.adicionarFone(new Fone("Trabalho", "(24)62362-abc"))){
+        contato2.adicionarFone(new Fone(Identificador.TRABALHO, "(24)62362-1925"));
+        contato2.adicionarFone(new Fone(Identificador.OI, "(79)98614-1326"));
+        if(!contato2.adicionarFone(new Fone(Identificador.VIVO, "(24)62362-abc"))){
             System.out.println("fail: numero de telefone invalido"); //fail: numero de telefone invalido
         }
-        System.out.println(contato2); // - Ariele [0:Trabalho:(24)62362-1925]
+        System.out.println(contato2); // - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
         
         agenda.adicionarContato(contato);
         agenda.adicionarContato(contato1);
@@ -68,39 +72,48 @@ public class Runner {
         System.out.println(agenda);
         /*
             - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
-            - Ariele [0:Trabalho:(24)62362-1925]
-            - Biatriz [0:Vivo:(80)63810-9092]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092]
         */
 
+        int quantidade = agenda.quantidadeDeFones(Identificador.TRABALHO);
+        System.out.println("Total de telefones com o identifcador (Trabalho) é igual a " +  quantidade);
+        // Total de telefones com o identifcador (Trabalho) é igual a 2
+
         Contato contato3 = new Contato("Biatriz");
-        contato3.adicionarFone(new Fone("OI", "(59)67638-0967"));
-        contato3.adicionarFone(new Fone("Casa", "(59)67638-0967"));
+        contato3.adicionarFone(new Fone(Identificador.OI, "(59)67638-0967"));
+        contato3.adicionarFone(new Fone(Identificador.CASA, "(59)67638-0967"));
         agenda.adicionarContato(contato3);
         System.out.println(agenda);
         /*
             - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
-            - Ariele [0:Trabalho:(24)62362-1925]
-            - Biatriz [0:Vivo:(80)63810-9092] [1:OI:(59)67638-0967] [2:Casa:(59)67638-0967]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
         */
 
         agenda.removerFone("Adriele", 1);
         System.out.println(agenda);
         /*
             - Adriele [0:Claro:(77)89085-9077]
-            - Ariele [0:Trabalho:(24)62362-1925]
-            - Biatriz [0:Vivo:(80)63810-9092] [1:OI:(59)67638-0967] [2:Casa:(59)67638-0967]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
         */
 
+        int quantidadeTotal = agenda.quantidadeTotalDeFones();
+        System.out.println("Total de telefones cadastrados na agenda é igual a " + quantidadeTotal);
+        //"Total de telefones cadastrados na agenda é igual a 6
+
         if(!agenda.removerContato("Alex")){
-            System.out.println("fail: nome do contato não esta cadastrado na ageda"); 
+            System.out.println("fail: nome do contato não esta cadastrado na agenda"); 
             // fail: nome do contato não esta cadastrado na agenda
         }
+
         ArrayList<Contato> resultados = agenda.pesquisar("le");
         for(Contato resultado : resultados)
             System.out.println(resultado.toString());
         /*
             - Adriele [0:Claro:(77)89085-9077]
-            - Ariele [0:Trabalho:(24)62362-1925]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
         */
     }
 }

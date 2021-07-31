@@ -14,8 +14,7 @@ public class Agenda {
     }
 
     public List<Contato> getContatos() {
-        ArrayList<Contato> contatosLista = new ArrayList<>(contatos.values());
-        return contatosLista;
+        return new ArrayList<Contato>(contatos.values());
     }
 
     public Contato getContato(String name){
@@ -34,17 +33,12 @@ public class Agenda {
     }
 
     public boolean removerContato(String name){
-        if(contatos.containsKey(name)){
-            contatos.remove(name);
-            return true;
-        }
-        return false;
+        return (contatos.remove(name) != null);
     }
 
     public boolean removerFone(String name, int index){
         if(contatos.containsKey(name)){
-            if(contatos.get(name).removerFone(index))
-                return true;
+            return contatos.get(name).removerFone(index);
         }
         return false;
     }
@@ -53,8 +47,8 @@ public class Agenda {
         int quantidade = 0;
         for(Contato contato : contatos.values()){
             ArrayList<Fone> fones = contato.getFones();
-            for(int i=0;i<fones.size();i++){
-                if(fones.get(i).getIdentificador() == identificador){ 
+            for(Fone fone : fones){
+                if(fone.getIdentificador() == identificador){
                     quantidade++;
                 }
             }
@@ -62,13 +56,20 @@ public class Agenda {
         return quantidade;
     }
 
+    public int quantidadeTotalDeFones(){
+        int quantidadeTotal = 0;
+        for(Contato contato : contatos.values()){
+            quantidadeTotal += contato.quantidadeFones();
+        }
+        return quantidadeTotal;
+    }
+
     public ArrayList<Contato> pesquisar(String expressao){
         ArrayList<Contato> resultados = new ArrayList<>();
         
-        Pattern pattern = Pattern.compile(expressao);
-        Matcher matcher;
+        Pattern pattern = Pattern.compile(expressao);   
         for(Contato contato : contatos.values()){
-            matcher = pattern.matcher(contato.toString());
+            Matcher matcher = pattern.matcher(contato.toString());
             if(matcher.find()){
                 resultados.add(contato);
             }

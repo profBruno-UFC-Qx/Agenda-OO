@@ -14,6 +14,10 @@ public class Contato implements Comparable<Contato> {
         return name;
     }
 
+    public int quantidadeFones(){
+        return fones.size();
+    }
+
     public ArrayList<Fone> getFones() {
         return fones;
     }
