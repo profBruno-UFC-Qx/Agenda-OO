@@ -41,6 +41,7 @@ O objetivo dessa atividade é implementar uma agenda que possui vários contatos
 
 
 ## Diagrama
+![diagrama uml](diagrama.png)
 
 ## Exemplo de execução 
 ```java
