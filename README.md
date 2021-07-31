@@ -1,24 +1,7 @@
-# Instruções
+# Contato - Agenda 
+![contato](assets/figura.jpg)
 
-Após clonar o projeto siga os seguintes passos:
-
-  1. Altere o **rootProject.name** no arquivo **setting.gradle**.
-  2. Atualize o README com o conteúdo próprio da atividade.
-  3. **Não esqueça de atualizar o link do relatório de entrega** e de remover essa seção *Instruções*.
-  4. Crie as classes esqueleto no branch principal (mair/master), commit e faça o push.
-  5. Crie um branch local para implementar a solução e os testes.
-     - `git checkout -b nome_do_branch`
-  6. Ao terminar, faça um push para um novo branch remoto.
-     - `git push origin nome_do_branch`
-  7. Na interface do GitHub abra um **Pull Request**.
-
-----
-
-# Título do trabalho
-Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. 
-Si num tem leite então bota uma pinga aí cumpadi! Vehicula non. Ut sed ex eros. 
-Vivamus sit amet nibh non tellus tristique interdum. 
-Mé faiz elementum girarzis, nisi eros vermeio.
+O objetivo dessa atividade é implementar uma agenda que possui vários contatos e cada contato possui vários telefones.
 
 
 - [Requisitos](#requisitos)
@@ -29,16 +12,112 @@ Mé faiz elementum girarzis, nisi eros vermeio.
 
 ## Requisitos
 
-- Requisito 1
-  - Descrição 1
-  - Descrição 2
-- Requisito 2
-  - Descrição 1
-  - Descrição 2
+- Inicializar um contato
+  - Para inicializar um contato você precisar informar o nome do contato.
+- Inserir fones no contato
+  - Um fone tem um indentificador e um número
+  - Identificadores são nomes como: casa, fixo, tim, claro.
+- Validar números de telefone
+  - Processe os números de telefone para que sejem aceitos somente aqueles que tem os seguintes caracteres: ```0123456789()-```.
+  - Se o usuário tentar inserir um número de telefone inválido não adcione o fone no contato.
+- Adicionar contato na ageda
+  - O contato possui o nome como chave
+  - Se tentar adicionar outro contato na agenda com o mesmo nome, adicione apenas os telefones no contato existente.
+- Mostrar na agenda
+  - Exiba os contatos da agenda em ordem alfabética.
+- Remoção de contatos da agenda
+  - Remover contato pela chave.
+  - Remover telefone do contato pela chave e por indíce do telefone.
+- Busca
+  - Fazer uma busca por um padrão em todos os atributos do contato, seja por nome, identificado ou telefone.
+  - Se o contato tiver qualquer campo que combine com a string pattern de busca, ele deve ser retornado. Se o pattern é maria, devem ser retornados os contatos como "maria julia", "mariana", "ana maria" etc. Também inclua na busca identificador do telefone e o número de telefone.
+  - Exiba os resultados também em ordem alfabética.
+- Pesquisar quantidade de telefones
+  - Exiba a quantidade de telefones de cada identificador cadastrados na agenda.
+  - Exiba a quantidade total de telefones cadastrados na agenda.
+
 
 ## Diagrama
 
 ## Exemplo de execução 
+```java
+import java.util.ArrayList;
+
+public class Runner {
+
+    public static void main(final String[] args) {
+        
+        Agenda agenda = new Agenda();
+        
+        Contato contato = new Contato("Adriele");
+        contato.adicionarFone(new Fone(Identificador.CLARO, "(77)89085-9077"));
+        contato.adicionarFone(new Fone(Identificador.TIM, "(63)61730-9301"));
+        System.out.println(contato); // - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
+        
+        Contato contato1 = new Contato("Biatriz");
+        contato1.adicionarFone(new Fone(Identificador.TRABALHO, "(80)63810-9092"));
+        System.out.println(contato1); // - Biatriz [0:Trabalho:(80)63810-9092]
+        
+        Contato contato2 = new Contato("Ariele");
+        contato2.adicionarFone(new Fone(Identificador.TRABALHO, "(24)62362-1925"));
+        contato2.adicionarFone(new Fone(Identificador.OI, "(79)98614-1326"));
+        if(!contato2.adicionarFone(new Fone(Identificador.VIVO, "(24)62362-abc"))){
+            System.out.println("fail: numero de telefone invalido"); //fail: numero de telefone invalido
+        }
+        System.out.println(contato2); // - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+        
+        agenda.adicionarContato(contato);
+        agenda.adicionarContato(contato1);
+        agenda.adicionarContato(contato2);
+        System.out.println(agenda);
+        /*
+            - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092]
+        */
+
+        int quantidade = agenda.quantidadeDeFones(Identificador.TRABALHO);
+        System.out.println("Total de telefones com o identifcador (Trabalho) é igual a " +  quantidade);
+        // Total de telefones com o identifcador (Trabalho) é igual a 2
+
+        Contato contato3 = new Contato("Biatriz");
+        contato3.adicionarFone(new Fone(Identificador.OI, "(59)67638-0967"));
+        contato3.adicionarFone(new Fone(Identificador.CASA, "(59)67638-0967"));
+        agenda.adicionarContato(contato3);
+        System.out.println(agenda);
+        /*
+            - Adriele [0:Claro:(77)89085-9077] [1:Tim:(63)61730-9301]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
+        */
+
+        agenda.removerFone("Adriele", 1);
+        System.out.println(agenda);
+        /*
+            - Adriele [0:Claro:(77)89085-9077]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+            - Biatriz [0:Trabalho:(80)63810-9092] [1:Oi:(59)67638-0967] [2:Casa:(59)67638-0967]
+        */
+
+        int quantidadeTotal = agenda.quantidadeTotalDeFones();
+        System.out.println("Total de telefones cadastrados na agenda é igual a " + quantidadeTotal);
+        //"Total de telefones cadastrados na agenda é igual a 6
+
+        if(!agenda.removerContato("Alex")){
+            System.out.println("fail: nome do contato não esta cadastrado na agenda"); 
+            // fail: nome do contato não esta cadastrado na agenda
+        }
+
+        ArrayList<Contato> resultados = agenda.pesquisar("le");
+        for(Contato resultado : resultados)
+            System.out.println(resultado.toString());
+        /*
+            - Adriele [0:Claro:(77)89085-9077]
+            - Ariele [0:Trabalho:(24)62362-1925] [1:Oi:(79)98614-1326]
+        */
+    }
+}
+```
 
 ## Relatório de Entrega
 
